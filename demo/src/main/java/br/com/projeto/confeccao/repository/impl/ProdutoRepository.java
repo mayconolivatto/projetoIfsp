@@ -1,4 +1,4 @@
-package br.com.projeto.confeccao.repository;
+package br.com.projeto.confeccao.repository.impl;
 
 import br.com.projeto.confeccao.model.Produto;
 

@@ -1,6 +1,8 @@
-package br.com.projeto.confeccao.repository;
+package br.com.projeto.confeccao.repository.impl;
 
 import java.util.List;
+
+import br.com.projeto.confeccao.repository.IBaseRepository;
 
 public class GenericoRepositorio<E> implements IBaseRepository<E> {
 
