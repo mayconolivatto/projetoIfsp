@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.projeto.confeccao.controller.base.IBaseController;
 import br.com.projeto.confeccao.model.Usuario;
 import br.com.projeto.confeccao.repository.IUsuarioRepository;
 
 @RestController
-public class UsuarioController {
+public class UsuarioController implements IBaseController<Usuario>{
 
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
@@ -50,5 +51,7 @@ public class UsuarioController {
 	public void deletar(@PathVariable("id") Long id){
 		usuarioRepository.delete(id);
 	}
+
+	
 	
 }
