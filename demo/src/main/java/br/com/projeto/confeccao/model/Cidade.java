@@ -1,56 +1,42 @@
 package br.com.projeto.confeccao.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Produto {
-
-
+public class Cidade  {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String nome;	
 	
-	private String descricao;
-	private String nome;
-	private BigDecimal valorCompra;
-	private BigDecimal valorVende;
+	@ManyToOne
+	private Estado estado;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public BigDecimal getValorCompra() {
-		return valorCompra;
+
+	public Estado getEstado() {
+		return estado;
 	}
-	public void setValorCompra(BigDecimal valorCompra) {
-		this.valorCompra = valorCompra;
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
-	public BigDecimal getValorVende() {
-		return valorVende;
-	}
-	public void setValorVende(BigDecimal valorVende) {
-		this.valorVende = valorVende;
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -58,6 +44,7 @@ public class Produto {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -66,7 +53,7 @@ public class Produto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Cidade other = (Cidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -74,9 +61,6 @@ public class Produto {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 	
 	

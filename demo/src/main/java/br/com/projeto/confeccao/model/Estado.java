@@ -1,55 +1,47 @@
 package br.com.projeto.confeccao.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Produto {
-
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Estado {
+	@Id	
 	private Long id;
-	
-	private String descricao;
+	private String uf;
 	private String nome;
-	private BigDecimal valorCompra;
-	private BigDecimal valorVende;
+	@ManyToOne
+	private Pais pais;
+	
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getDescricao() {
-		return descricao;
+	public String getUf() {
+		return uf;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public BigDecimal getValorCompra() {
-		return valorCompra;
+	public Pais getPais() {
+		return pais;
 	}
-	public void setValorCompra(BigDecimal valorCompra) {
-		this.valorCompra = valorCompra;
-	}
-	public BigDecimal getValorVende() {
-		return valorVende;
-	}
-	public void setValorVende(BigDecimal valorVende) {
-		this.valorVende = valorVende;
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
 	@Override
 	public int hashCode() {
@@ -66,7 +58,7 @@ public class Produto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Estado other = (Estado) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -74,9 +66,6 @@ public class Produto {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 	
 	

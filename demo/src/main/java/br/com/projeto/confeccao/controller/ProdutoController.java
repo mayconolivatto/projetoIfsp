@@ -1,6 +1,7 @@
 package br.com.projeto.confeccao.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,33 +10,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projeto.confeccao.controller.base.IBaseController;
-import br.com.projeto.confeccao.model.Cliente;
-import br.com.projeto.confeccao.repository.IClienteRepository;
+import br.com.projeto.confeccao.model.Produto;
+import br.com.projeto.confeccao.repository.IProdutoRepository;
 
 @RestController
-public class ClienteController implements IBaseController<Cliente> {
+@CrossOrigin(maxAge = 3600)
+public class ProdutoController implements IBaseController<Produto> {
 
 	@Autowired
-	private IClienteRepository clienteRepository;
+	private IProdutoRepository produtoRepository;
 
-	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
+	@RequestMapping(value = "/produto", method = RequestMethod.GET)
 	public Object get(@RequestParam(value = "id", required = false) Long id) {
 		if (id != null) {
-			return clienteRepository.findOne(id);
+			return produtoRepository.findOne(id);
 		} else {
-			return clienteRepository.findAll();
+			return produtoRepository.findAll();
 		}
 	}
 
 	
-	@RequestMapping(value = "/cliente", method = RequestMethod.POST)
-	public Object salvar(@RequestBody() Cliente cliente) {
-		return clienteRepository.saveAndFlush(cliente);
+	@RequestMapping(value = "/produto", method = RequestMethod.POST)
+	public Object salvar(@RequestBody() Produto produto) {
+		return produtoRepository.saveAndFlush(produto);
 	}
 
-	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/produto/{id}", method = RequestMethod.DELETE)
 	public void deletar(@PathVariable("id") Long id) {
-		clienteRepository.delete(id);
+		produtoRepository.delete(id);
 	}
 
 }
