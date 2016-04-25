@@ -15,6 +15,7 @@ public class ItemOrcamento  {
 	@ManyToOne
 	private Orcamento orcamento;
 
+	@ManyToOne
 	private Produto produto;
 	private Long quantidade;
 	public Long getId() {

@@ -10,34 +10,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projeto.confeccao.controller.base.IBaseController;
-import br.com.projeto.confeccao.model.Cliente;
-import br.com.projeto.confeccao.repository.IClienteRepository;
+import br.com.projeto.confeccao.model.Orcamento;
+import br.com.projeto.confeccao.repository.IOrcamentoRepository;
 
 @RestController
 @CrossOrigin(maxAge = 3600)
-public class ClienteController implements IBaseController<Cliente> {
+public class OrcamentoController implements IBaseController<Orcamento> {
 
 	@Autowired
-	private IClienteRepository clienteRepository;
+	private IOrcamentoRepository orcamentoRepository;
 
-	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
+	@RequestMapping(value = "/orcamento", method = RequestMethod.GET)
 	public Object get(@RequestParam(value = "id", required = false) Long id) {
 		if (id != null) {
-			return clienteRepository.findOne(id);
+			return orcamentoRepository.findOne(id);
 		} else {
-			return clienteRepository.findAll();
+			return orcamentoRepository.findAll();
 		}
 	}
 
 	
-	@RequestMapping(value = "/cliente", method = RequestMethod.POST)
-	public Object salvar(@RequestBody() Cliente cliente) {
-		return clienteRepository.saveAndFlush(cliente);
+	@RequestMapping(value = "/orcamento", method = RequestMethod.POST)
+	public Object salvar(@RequestBody() Orcamento orcamento) {
+		return orcamentoRepository.saveAndFlush(orcamento);
 	}
 
-	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/orcamento/{id}", method = RequestMethod.DELETE)
 	public void deletar(@PathVariable("id") Long id) {
-		clienteRepository.delete(id);
+		orcamentoRepository.delete(id);
 	}
 
 }

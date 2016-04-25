@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 @Entity
 public class Orcamento {
@@ -15,7 +16,10 @@ public class Orcamento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
 	private Cliente cliente;
+	
 	
 	@OneToMany(mappedBy = "orcamento", targetEntity = ItemOrcamento.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
 	private List<ItemOrcamento> listaOrcamento;
