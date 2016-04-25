@@ -2,11 +2,13 @@ package br.com.projeto.confeccao.repository.impl;
 
 import java.util.List;
 
+import br.com.projeto.confeccao.model.GenericModel;
 import br.com.projeto.confeccao.repository.IBaseRepository;
 
-public class GenericoRepositorio<E> implements IBaseRepository<E> {
+public class GenericoRepositorio<E extends GenericModel> implements IBaseRepository<E> {
 
 	private List<E> listaTipoE;
+	private static Long id = 1l;
 
 	@Override
 	public Object findOne(E e) {
@@ -25,13 +27,19 @@ public class GenericoRepositorio<E> implements IBaseRepository<E> {
 
 	@Override
 	public Object saveAndFlush(E obj) {
-		// TODO Auto-generated method stub
-		return null;
+		if(listaTipoE.contains(obj)){
+			listaTipoE.remove(obj);
+		}else{
+			obj.setId(id++);		
+		}
+		listaTipoE.add(obj);
+		
+	  return obj;
 	}
 
 	@Override
-	public void deletar(Long id) {
-		// TODO Auto-generated method stub
+	public void deletar(E obj) {
+		listaTipoE.remove(obj);
 
 	}
 

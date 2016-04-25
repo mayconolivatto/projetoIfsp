@@ -1,6 +1,6 @@
 package br.com.projeto.confeccao.model;
 
-public class ItemEstoque {
+public class ItemEstoque extends GenericModel {
 	
 
 	private Produto produto;

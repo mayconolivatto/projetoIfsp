@@ -5,6 +5,6 @@ public interface IBaseRepository<E> {
 	Object findOne(E id);
 	Object findAll();
 	Object saveAndFlush(E obj);
-	void deletar(Long id);
+	void deletar(E id);
 
 }

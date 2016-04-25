@@ -1,15 +1,33 @@
 package br.com.projeto.confeccao.model;
 
-public class Fornecedor {
+public class Fornecedor extends GenericModel{
 
-	private Long id;
+	
 	private String nome;
 	private String cpf;
-	public Long getId() {
-		return id;
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+		return result;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fornecedor other = (Fornecedor) obj;
+		if (getId() == null) {
+			if (other.getId() != null)
+				return false;
+		} else if (!getId().equals(other.getId()))
+			return false;
+		return true;
 	}
 	public String getNome() {
 		return nome;

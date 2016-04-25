@@ -1,6 +1,8 @@
 package br.com.projeto.confeccao.repository.impl;
 
-public class ItemEstoqueRepository extends GenericoRepositorio<ItemEstoqueRepository>{
+import br.com.projeto.confeccao.model.ItemEstoque;
+
+public class ItemEstoqueRepository extends GenericoRepositorio<ItemEstoque>{
 	
 
 }

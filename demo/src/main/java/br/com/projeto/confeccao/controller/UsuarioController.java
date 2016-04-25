@@ -1,6 +1,7 @@
 package br.com.projeto.confeccao.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,45 +14,42 @@ import br.com.projeto.confeccao.model.Usuario;
 import br.com.projeto.confeccao.repository.IUsuarioRepository;
 
 @RestController
-public class UsuarioController implements IBaseController<Usuario>{
+@CrossOrigin(maxAge = 3600)
+public class UsuarioController implements IBaseController<Usuario> {
 
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
-	
+
 	@RequestMapping(value = "/usuario", method = RequestMethod.GET)
-	public Object get(@RequestParam(value="id", required=false) Long id){
-		if(id != null){
+	public Object get(@RequestParam(value = "id", required = false) Long id) {
+		if (id != null) {
 			return usuarioRepository.findOne(id);
-		}else{
+		} else {
 			return usuarioRepository.findAll();
 		}
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public Object getLogin(@RequestParam(value="id", required=false) Long id, @RequestParam(value="senha", required=false) String senha){
-		
+	public Object getLogin(@RequestParam(value = "id", required = false) Long id,
+			@RequestParam(value = "senha", required = false) String senha) {
+
 		Usuario u = usuarioRepository.findOne(id);
-		if(u != null && u.getSenha().equals(senha)){
+		if (u != null && u.getSenha().equals(senha)) {
 			return u;
-		}
-		else{
+		} else {
 			return null;
 		}
-		
-		
-		
+
 	}
-	
+
 	@RequestMapping(value = "/usuario", method = RequestMethod.POST)
-	public Object salvar(@RequestBody() Usuario usuario){
+	public Object salvar(@RequestBody() Usuario usuario) {
 		return usuarioRepository.saveAndFlush(usuario);
 	}
-	
+
 	@RequestMapping(value = "/usuario/{id}", method = RequestMethod.DELETE)
-	public void deletar(@PathVariable("id") Long id){
+	public void deletar(@PathVariable("id") Long id) {
 		usuarioRepository.delete(id);
 	}
 
-	
-	
 }
