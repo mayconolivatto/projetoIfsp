@@ -9,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 @Entity
+@NamedQuery(name = "Orcamento.findByIdNovo",
+query = "select o from Orcamento o inner join o.listaItemOrcamento as itemOrcamento where o.id = ?")
 public class Orcamento {
 	
 	@Id
@@ -22,7 +25,7 @@ public class Orcamento {
 	
 	
 	@OneToMany(mappedBy = "orcamento", targetEntity = ItemOrcamento.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
-	private List<ItemOrcamento> listaOrcamento;
+	private List<ItemOrcamento> listaItemOrcamento;
 	
 	@Override
 	public int hashCode() {
@@ -59,11 +62,11 @@ public class Orcamento {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<ItemOrcamento> getListaOrcamento() {
-		return listaOrcamento;
+	public List<ItemOrcamento> getListaItemOrcamento() {
+		return listaItemOrcamento;
 	}
-	public void setListaOrcamento(List<ItemOrcamento> listaOrcamento) {
-		this.listaOrcamento = listaOrcamento;
+	public void setListaItemOrcamento(List<ItemOrcamento> listaItemOrcamento) {
+		this.listaItemOrcamento = listaItemOrcamento;
 	}
 	
 	

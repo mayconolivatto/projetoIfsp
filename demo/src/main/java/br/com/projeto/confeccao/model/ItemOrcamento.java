@@ -5,8 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "ItemOrcamento.findByOrcamento",
+query = "select i from ItemOrcamento i where i.orcamento = ?")
 public class ItemOrcamento  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

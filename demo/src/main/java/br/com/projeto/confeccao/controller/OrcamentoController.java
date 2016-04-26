@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projeto.confeccao.controller.base.IBaseController;
 import br.com.projeto.confeccao.model.Orcamento;
+import br.com.projeto.confeccao.repository.IItemOrcamentoRepository;
 import br.com.projeto.confeccao.repository.IOrcamentoRepository;
 
 @RestController
@@ -19,11 +20,17 @@ public class OrcamentoController implements IBaseController<Orcamento> {
 
 	@Autowired
 	private IOrcamentoRepository orcamentoRepository;
+	@Autowired
+	private IItemOrcamentoRepository itemOrcamentoRepository;
+	
+	
 
 	@RequestMapping(value = "/orcamento", method = RequestMethod.GET)
 	public Object get(@RequestParam(value = "id", required = false) Long id) {
 		if (id != null) {
-			return orcamentoRepository.findOne(id);
+			Orcamento o = orcamentoRepository.findOne(id);
+			o.setListaItemOrcamento(itemOrcamentoRepository.findByOrcamento(o));
+			return o;
 		} else {
 			return orcamentoRepository.findAll();
 		}
@@ -36,7 +43,7 @@ public class OrcamentoController implements IBaseController<Orcamento> {
 	}
 
 	@RequestMapping(value = "/orcamento/{id}", method = RequestMethod.DELETE)
-	public void deletar(@PathVariable("id") Long id) {
+	public void deletar(@PathVariable("id") Long id) {	
 		orcamentoRepository.delete(id);
 	}
 
