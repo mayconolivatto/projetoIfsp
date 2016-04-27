@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@NamedQuery(name = "ItemOrcamento.findByOrcamento",
+@NamedQuery(name = "ItemOrcamento.buscaPorIdOrcamento",
 query = "select i from ItemOrcamento i where i.orcamento.id = ?")
 public class ItemOrcamento implements Serializable {
 	/**

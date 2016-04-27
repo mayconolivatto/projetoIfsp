@@ -30,7 +30,7 @@ public class ItemOrcamentoController implements IBaseController<ItemOrcamento>{
 	public Object get(@RequestParam(value = "id", required = false) Long id) {
 		if (id != null) {
 			
-			return itemOrcamentoRepository.findByOrcamento(id);
+			return itemOrcamentoRepository.buscaPorIdOrcamento(id);
 		} else {
 			return itemOrcamentoRepository.findAll();
 		}

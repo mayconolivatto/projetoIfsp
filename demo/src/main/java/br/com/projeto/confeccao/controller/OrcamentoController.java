@@ -37,7 +37,7 @@ public class OrcamentoController implements IBaseController<Orcamento> {
 			Orcamento o = orcamentoRepository.buscaOrcamentoCompleto(id);
 			//itemOrcamentoRepository.findByOrcamento(o);
 		//	Hibernate.initialize(o.getListaItemOrcamento());
-			o.setListaItemOrcamento(itemOrcamentoRepository.findByOrcamento(id));
+			o.setListaItemOrcamento(itemOrcamentoRepository.buscaPorIdOrcamento(id));
 			return o;
 		} else {
 			return orcamentoRepository.findAll();
