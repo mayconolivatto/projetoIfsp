@@ -1,5 +1,6 @@
 package br.com.projeto.confeccao.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,20 +12,30 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
-@NamedQuery(name = "Orcamento.findByIdNovo",
+@NamedQuery(name = "Orcamento.buscaOrcamentoCompleto",
 query = "select o from Orcamento o inner join o.listaItemOrcamento as itemOrcamento where o.id = ?")
-public class Orcamento {
+public class Orcamento implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2766888539025998001L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
+	@JsonManagedReference
 	private Cliente cliente;
 	
 	
-	@OneToMany(mappedBy = "orcamento", targetEntity = ItemOrcamento.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	@OneToMany(mappedBy = "orcamento", targetEntity = ItemOrcamento.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	 @JsonBackReference
 	private List<ItemOrcamento> listaItemOrcamento;
 	
 	@Override

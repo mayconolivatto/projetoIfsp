@@ -6,6 +6,6 @@ import br.com.projeto.confeccao.model.Orcamento;
 
 public interface IOrcamentoRepository extends JpaRepository<Orcamento, Long>{
 	
-
+	Orcamento buscaOrcamentoCompleto(Long id);
 
 }

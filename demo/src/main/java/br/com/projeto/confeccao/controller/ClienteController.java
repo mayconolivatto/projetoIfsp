@@ -17,6 +17,10 @@ import br.com.projeto.confeccao.repository.IClienteRepository;
 @CrossOrigin(maxAge = 3600)
 public class ClienteController implements IBaseController<Cliente> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6977713342295427319L;
 	@Autowired
 	private IClienteRepository clienteRepository;
 

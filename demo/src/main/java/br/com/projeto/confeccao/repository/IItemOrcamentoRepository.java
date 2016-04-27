@@ -9,7 +9,7 @@ import br.com.projeto.confeccao.model.Orcamento;
 
 public interface IItemOrcamentoRepository extends JpaRepository<ItemOrcamento, Long>{
 	
-	List<ItemOrcamento> findByOrcamento(Orcamento orcamento);
+	List<ItemOrcamento> findByOrcamento(Long idOrcamento);
 	
 
 }

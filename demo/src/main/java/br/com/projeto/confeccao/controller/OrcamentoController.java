@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projeto.confeccao.controller.base.IBaseController;
+import br.com.projeto.confeccao.model.ItemOrcamento;
 import br.com.projeto.confeccao.model.Orcamento;
 import br.com.projeto.confeccao.repository.IItemOrcamentoRepository;
 import br.com.projeto.confeccao.repository.IOrcamentoRepository;
@@ -18,6 +19,10 @@ import br.com.projeto.confeccao.repository.IOrcamentoRepository;
 @CrossOrigin(maxAge = 3600)
 public class OrcamentoController implements IBaseController<Orcamento> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6586055342244961550L;
 	@Autowired
 	private IOrcamentoRepository orcamentoRepository;
 	@Autowired
@@ -28,8 +33,11 @@ public class OrcamentoController implements IBaseController<Orcamento> {
 	@RequestMapping(value = "/orcamento", method = RequestMethod.GET)
 	public Object get(@RequestParam(value = "id", required = false) Long id) {
 		if (id != null) {
-			Orcamento o = orcamentoRepository.findOne(id);
-			o.setListaItemOrcamento(itemOrcamentoRepository.findByOrcamento(o));
+			
+			Orcamento o = orcamentoRepository.buscaOrcamentoCompleto(id);
+			//itemOrcamentoRepository.findByOrcamento(o);
+		//	Hibernate.initialize(o.getListaItemOrcamento());
+			//o.setListaItemOrcamento(itemOrcamentoRepository.findByOrcamento(o));
 			return o;
 		} else {
 			return orcamentoRepository.findAll();
@@ -39,7 +47,12 @@ public class OrcamentoController implements IBaseController<Orcamento> {
 	
 	@RequestMapping(value = "/orcamento", method = RequestMethod.POST)
 	public Object salvar(@RequestBody() Orcamento orcamento) {
-		return orcamentoRepository.saveAndFlush(orcamento);
+		 orcamentoRepository.saveAndFlush(orcamento);
+		 for(ItemOrcamento item : orcamento.getListaItemOrcamento())
+		 itemOrcamentoRepository.saveAndFlush(item);
+		 
+		 return orcamento;
+		
 	}
 
 	@RequestMapping(value = "/orcamento/{id}", method = RequestMethod.DELETE)

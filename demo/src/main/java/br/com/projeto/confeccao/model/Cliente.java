@@ -1,5 +1,7 @@
 package br.com.projeto.confeccao.model;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -15,8 +17,13 @@ import javax.persistence.ManyToOne;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING) 
 @DiscriminatorValue("P")
-public class Cliente  {
+public class Cliente  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 942762302095731638L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

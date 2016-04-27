@@ -17,6 +17,10 @@ import br.com.projeto.confeccao.repository.IProdutoRepository;
 @CrossOrigin(maxAge = 3600)
 public class ProdutoController implements IBaseController<Produto> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5326375842618499010L;
 	@Autowired
 	private IProdutoRepository produtoRepository;
 

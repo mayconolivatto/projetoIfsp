@@ -17,6 +17,11 @@ import br.com.projeto.confeccao.repository.IUsuarioRepository;
 @CrossOrigin(maxAge = 3600)
 public class UsuarioController implements IBaseController<Usuario> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4181224475814971897L;
+	
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
 

@@ -1,5 +1,7 @@
 package br.com.projeto.confeccao.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,19 +9,30 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @NamedQuery(name = "ItemOrcamento.findByOrcamento",
-query = "select i from ItemOrcamento i where i.orcamento = ?")
-public class ItemOrcamento  {
+query = "select i from ItemOrcamento i where i.orcamento.id = ?")
+public class ItemOrcamento implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7974652966747358491L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
+	@JsonManagedReference
 	private Orcamento orcamento;
 
 	@ManyToOne
+	@JsonManagedReference
 	private Produto produto;
+	
+	
 	private Long quantidade;
 	public Long getId() {
 		return id;

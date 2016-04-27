@@ -1,5 +1,6 @@
 package br.com.projeto.confeccao.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -10,8 +11,13 @@ import javax.persistence.Id;
 
 
 @Entity
-public class Produto {
+public class Produto implements Serializable {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5298521472095148077L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

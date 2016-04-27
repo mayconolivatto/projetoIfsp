@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "PF")
 public class ClientePF extends Cliente{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4856306930063880937L;
+
 	private String cpf;
 
 	private String rg;
