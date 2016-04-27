@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +34,9 @@ public class Cliente  implements Serializable{
 	private String telefone;
 	private String email;
 	private String celular;
-	private String cep;
+	
+	@Embedded
+	private Endereco endereco;
 	
 	
 	public String getNome() {
@@ -44,8 +47,7 @@ public class Cliente  implements Serializable{
 	}
 	
 	
-	@ManyToOne
-	private Rua rua;
+	
 	
 	
 	 
@@ -73,18 +75,13 @@ public class Cliente  implements Serializable{
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-	public String getCep() {
-		return cep;
+	public Endereco getEndereco() {
+		return endereco;
 	}
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
-	public Rua getRua() {
-		return rua;
-	}
-	public void setRua(Rua rua) {
-		this.rua = rua;
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
