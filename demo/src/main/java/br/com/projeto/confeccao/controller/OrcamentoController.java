@@ -1,6 +1,7 @@
 package br.com.projeto.confeccao.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,19 +46,29 @@ public class OrcamentoController implements IBaseController<Orcamento> {
 	}
 
 	
-	@RequestMapping(value = "/orcamento", method = RequestMethod.POST)
+	@RequestMapping(value = "/orcamento", method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object salvar(@RequestBody() Orcamento orcamento) {
 		 orcamentoRepository.saveAndFlush(orcamento);
-		 for(ItemOrcamento item : orcamento.getListaItemOrcamento())
-		 itemOrcamentoRepository.saveAndFlush(item);
+		 for(ItemOrcamento item : orcamento.getListaItemOrcamento()){
+			 item.setOrcamento(orcamento);
+			 itemOrcamentoRepository.saveAndFlush(item);
+		 }
 		 
 		 return orcamento;
 		
 	}
 
-	@RequestMapping(value = "/orcamento/{id}", method = RequestMethod.DELETE)
-	public void deletar(@PathVariable("id") Long id) {	
-		orcamentoRepository.delete(id);
+	@RequestMapping(value = "/orcamento/{id}", method = RequestMethod.DELETE , consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Object deletar(@PathVariable("id") Long id) {
+		int i = 1;
+		
+		try {
+			orcamentoRepository.delete(id);
+		} catch (Exception e) {
+			i= 0;
+		}
+		
+		return i;		
 	}
 
 }

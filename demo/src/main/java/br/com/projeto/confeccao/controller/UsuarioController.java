@@ -53,8 +53,16 @@ public class UsuarioController implements IBaseController<Usuario> {
 	}
 
 	@RequestMapping(value = "/usuario/{id}", method = RequestMethod.DELETE)
-	public void deletar(@PathVariable("id") Long id) {
-		usuarioRepository.delete(id);
+	public Object deletar(@PathVariable("id") Long id) {
+		int i = 1;
+		try{
+			usuarioRepository.delete(id);
+		}
+		catch(Exception e){
+			i = 0;
+		}
+		
+		return i;
 	}
 
 }

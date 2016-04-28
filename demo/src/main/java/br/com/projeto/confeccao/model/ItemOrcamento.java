@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @NamedQuery(name = "ItemOrcamento.buscaPorIdOrcamento",
@@ -25,11 +25,10 @@ public class ItemOrcamento implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@JsonManagedReference
+	@JsonBackReference
 	private Orcamento orcamento;
 
-	@ManyToOne
-	@JsonManagedReference
+	@ManyToOne	
 	private Produto produto;
 	
 	

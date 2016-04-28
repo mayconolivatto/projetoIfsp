@@ -40,8 +40,18 @@ public class ProdutoController implements IBaseController<Produto> {
 	}
 
 	@RequestMapping(value = "/produto/{id}", method = RequestMethod.DELETE)
-	public void deletar(@PathVariable("id") Long id) {
-		produtoRepository.delete(id);
+	public Object deletar(@PathVariable("id") Long id) {
+		
+		int i = 1;
+		try{
+			produtoRepository.delete(id);
+		}
+		catch(Exception e){
+			i = 0;
+		}
+		
+		return i;
+		
 	}
 
 }

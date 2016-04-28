@@ -40,8 +40,18 @@ public class ClienteController implements IBaseController<Cliente> {
 	}
 
 	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.DELETE)
-	public void deletar(@PathVariable("id") Long id) {
-		clienteRepository.delete(id);
+	public Object deletar(@PathVariable("id") Long id) {
+		int i = 1;
+		try {
+			clienteRepository.delete(id);	
+		} catch (Exception e) {
+			i=0;
+		}
+		
+		return i;
+		
+		
+		
 	}
 
 }

@@ -13,6 +13,6 @@ public interface IBaseController<E> extends Serializable{
 		
 	
 	Object salvar(@RequestBody() E obj);	
-	void deletar(@PathVariable("id") Long id);
+	Object deletar(@PathVariable("id") Long id) throws Exception;
 	
 }
